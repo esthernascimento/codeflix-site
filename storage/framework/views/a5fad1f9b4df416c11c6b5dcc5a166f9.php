@@ -1,1 +1,0 @@
-<?php /**PATH C:\Users\userlocal\Downloads\codeflix-site\resources\views/contato.blade.php ENDPATH**/ ?>
