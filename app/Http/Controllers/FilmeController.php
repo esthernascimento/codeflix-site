@@ -19,4 +19,18 @@ class FilmeController extends Controller
         $filmes = \App\Models\Filme::all();
         return $filmes;
     }
+
+    public function storeApi(Request $request){
+
+    $filme = new Filme();
+    
+    $filme -> titulo =  $request->titulo;
+    $filme -> genero = $request->genero;
+    $filme -> imagem = $request->imagem;
+    $filme -> classificacao = $request->classificacao;
+    $filme -> created_at =date('Y-m-d H:i:s');
+    $filme -> update_at =date('Y-m-d H:i:s');
+
+    $filme -> save();
+    }
 }
