@@ -12,4 +12,11 @@ class FilmeController extends Controller
         $filmes = \App\Models\Filme::all();
         return view('home', compact('filmes'));
     }
+
+    public function indexApi()
+    {
+        
+        $filmes = \App\Models\Filme::all();
+        return $filmes;
+    }
 }
