@@ -6,12 +6,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FilmeController;
 use App\Http\Controllers\MembroController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContatoController;
 
 
 Route::get('/', [FilmeController::class, 'index']);
 Route::get('/contato', function () { return view('contato'); });
 Route::get('/sobre', [MembroController::class, 'index'])->name('sobre');
 Route::resource('membros', MembroController::class);
+Route::resource('contatos', ContatoController::class)->only(['index','store']);
+
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [AuthController::class, 'showRegistrationForm'])->name('register');

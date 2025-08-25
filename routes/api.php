@@ -22,3 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/home', 'App\Http\Controllers\FilmeController@indexApi') ;
 
 Route::post('/home', 'App\Http\Controllers\FilmeController@indexApi') ;
+
+Route::get('/contato', 'App\Http\Controllers\ContatoController@indexApi') ;
+
+Route::post('/contato', 'App\Http\Controllers\ContatoController@indexApi') ;
