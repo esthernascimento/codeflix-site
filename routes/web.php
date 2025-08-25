@@ -24,7 +24,6 @@ Route::middleware('guest')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
 });
 
-// Rotas para quem JÁ ESTÁ logado
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', function () { return view('auth.dashboard'); })->name('dashboard');
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');

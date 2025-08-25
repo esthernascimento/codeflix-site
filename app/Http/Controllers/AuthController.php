@@ -30,7 +30,8 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('dashboard');
+
+        return redirect('/');
     }
 
     public function showLoginForm()
@@ -47,7 +48,15 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended(route('dashboard'));
+
+
+            if (Auth::user()->is_admin) {
+
+                return redirect()->route('dashboard');
+            }
+
+
+            return redirect()->intended('/');
         }
 
         return back()->withErrors([
@@ -62,6 +71,4 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return redirect('/');
     }
-
-    
 }
