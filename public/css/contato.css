@@ -75,3 +75,35 @@ textarea {
 button:hover {
   background-color: #cc0000;
 }
+
+.alert {
+  padding: 12px 14px;
+  border-radius: 6px;
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+.alert-success {
+  background: #e6ffed;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+}
+
+.alert-danger {
+  background: #fff5f5;
+  border: 1px solid #fecaca;
+  color: #7f1d1d;
+}
+
+/* realçar campos com erro */
+.input-invalid {
+  border-color: #ef4444 !important;
+  outline: none;
+}
+
+/* mensagem menor abaixo do campo */
+.field-error {
+  font-size: 12px;
+  margin-top: 6px;
+  color: #b91c1c;
+}
