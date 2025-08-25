@@ -2,12 +2,11 @@
 
 
 
-
 body {
   margin: 0;
   background-color: #000;
   color: #fff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
 }
 
 .container {
@@ -18,10 +17,12 @@ body {
 
 h1 {
   letter-spacing: 2px;
+  font-family: 'Oswald', sans-serif !important;
   font-size: 42px;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 2px;
+  margin-bottom: 50px;
 }
 
 form {
@@ -35,7 +36,7 @@ label {
   font-size: 16px;
   margin-top: 10px;
   color: #fff;
-  font-family: 'Roboto', sans-serif
+  font-family: 'Oswald', sans-serif;
 }
 
 input,textarea {
@@ -59,7 +60,7 @@ textarea {
   height: 50px;
 }
 
-button {
+.btn-enviar {
   margin-top: 60px;
   background-color: #800000;
   color: rgb(255, 255, 255);
