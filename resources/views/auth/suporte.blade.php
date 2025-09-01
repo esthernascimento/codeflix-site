@@ -41,46 +41,6 @@
                 <h2>101</h2>
             </div>
         </div>
-
-        <div class="box-table">
-  <table class="table-custom">
-    <thead>
-      <tr>
-        <th>Nome Contato</th>
-        <th>E-mail</th>
-        <th>Mensagem</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td>Esther Nascimento</td>
-          <td>esther@gmail.com</td>
-          <td>oiiie</td>
-          <td class="actions">
-            <a href="#"><i class="bi bi-pencil" title="Editar"></i></a>
-            <a href="#"><i class="bi bi-slash-circle" title="Desativar"></i></a>
-            <a href="#"><i class="bi bi-trash" title="Excluir"></i></a>
-          </td>
-        </tr>
-        <tr>
-          <td>Gisele Nunes</td>
-          <td>gisele@gmail.com</td>
-          <td>tudo bem?</td>
-          <td class="actions">
-            <a href="#"><i class="bi bi-pencil" title="Editar"></i></a>
-            <a href="#"><i class="bi bi-slash-circle" title="Desativar"></i></a>
-            <a href="#"><i class="bi bi-trash" title="Excluir"></i></a>
-          </td>
-        </tr>
-    </tbody>
-  </table>
-</div>
- 
- 
-    </div>
-
-
     </main>
 </div>
 @endsection
