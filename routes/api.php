@@ -26,3 +26,9 @@ Route::post('/home', 'App\Http\Controllers\FilmeController@indexApi') ;
 Route::get('/contato', 'App\Http\Controllers\ContatoController@indexApi') ;
 
 Route::post('/contato', 'App\Http\Controllers\ContatoController@indexApi') ;
+
+Route::put('/contato/{id}', 'App\Http\Controllers\ContatoController@updateApi');
+
+Route::delete('/contato/{id}', 'App\Http\Controllers\ContatoController@destroyApi');
+
+Route::get('/contato-qtd', 'App\Http\Controllers\ContatoController@countContato') ;
