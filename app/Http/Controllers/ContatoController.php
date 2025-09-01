@@ -51,4 +51,39 @@ class ContatoController extends Controller
         ->with('success', 'Contato enviado com sucesso!');
 }
 
+public function updateApi(Request $request, string $id)
+{
+    $validarDados = $request->validate([
+        'nome'=>'min:3' ,
+        'email'=>'max:40',
+        'mensagem'=>'max:40'
+    ]);
+
+    $contato = Contato::findOrFail($id);
+    $contato ->update($validarDados);
+
+    return response()->json(
+        ['message' => 'Contato alterado com sucesso', 'contato' => $contato]
+    );
+}
+
+public function destroyApi(string $id)
+{
+    Contato::where('id',$id)->delete();
+
+    return response()->json([
+        'message'=> 'Contato excluído',
+        'code'=>200
+    ]);
+}
+
+public function countContato(){
+    $contato = new Contato();
+
+    return response()->json([
+        'count'=> $contato->count(),
+        'code'=>200
+    ]);
+}
+
 }
