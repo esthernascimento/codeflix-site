@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-
 use App\Http\Controllers\FilmeController;
 use App\Http\Controllers\MembroController;
 use App\Http\Controllers\AuthController;
@@ -10,21 +9,25 @@ use App\Http\Controllers\ContatoController;
 
 
 Route::get('/', [FilmeController::class, 'index']);
-Route::get('/contato', function () { return view('contato'); });
-Route::get('/sobre', [MembroController::class, 'index'])->name('sobre');
-Route::resource('membros', MembroController::class);
-Route::resource('contatos', ContatoController::class)->only(['index','store']);
 
+Route::get('/sobre', [MembroController::class, 'index'])->name('sobre');
+
+Route::get('/contato', [ContatoController::class, 'index'])->name('contatos.index');
+
+Route::resource('contatos', ContatoController::class)->only(['index', 'store']);
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [AuthController::class, 'showRegistrationForm'])->name('register');
     Route::post('register', [AuthController::class, 'register']);
-    
+
     Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('login', [AuthController::class, 'login']);
 });
 
+
 Route::middleware('auth')->group(function () {
-    Route::get('dashboard', function () { return view('auth.dashboard'); })->name('dashboard');
+
+    Route::get('dashboard', [ContatoController::class, 'listarContatos'])->name('listarContatos');
+
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });

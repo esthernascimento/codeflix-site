@@ -7,83 +7,94 @@ use Illuminate\Http\Request;
 
 class ContatoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        $contatos =Contato::all();
+        // mais recentes primeiro + paginação
+        $contatos = Contato::latest()->paginate(10);
         return view('contato', compact('contatos'));
+    }
+
+
+    public function listarContatos()
+    {
+        $contatos = Contato::latest()->paginate(10);
+        return view('auth.dashboard', compact('contatos'));
     }
 
     public function indexApi()
     {
-
-        $contatos =Contato::all();
-        return $contatos;
+        $contatos = Contato::latest()->get();
+        return response()->json($contatos, 200);
     }
 
-    public function storeApi(Request $request){
 
-    $contato = new Contato();
+    public function storeApi(Request $request)
+    {
+        $data = $request->validate([
+            'nome'     => ['required','string','max:255'],
+            'email'    => ['required','email','max:255'],
+            'mensagem' => ['required','string','max:5000'],
+        ]);
 
-    $contato -> nome =  $request->nome;
-    $contato -> email = $request->email;
-    $contato -> mensagem = $request->mensagem;
-    $contato -> created_at =date('Y-m-d H:i:s');
-    $contato -> updated_at =date('Y-m-d H:i:s');
+        $contato = Contato::create($data);
 
-    $contato -> save();
+        return response()->json([
+            'message' => 'Contato criado com sucesso',
+            'contato' => $contato,
+        ], 201);
     }
+
 
     public function store(Request $request)
-{
-    $data = $request->validate([
-        'nome'     => ['required','string','max:255'],
-        'email'    => ['required','email','max:255'],
-        'mensagem' => ['required','string','max:5000'],
-    ]);
+    {
+        $data = $request->validate([
+            'nome'     => ['required','string','max:255'],
+            'email'    => ['required','email','max:255'],
+            'mensagem' => ['required','string','max:5000'],
+        ]);
 
-    \App\Models\Contato::create($data);
+        Contato::create($data);
 
-    return redirect()
-        ->route('contatos.index')
-        ->with('success', 'Contato enviado com sucesso!');
-}
+        return redirect()
+            ->route('contatos.index')
+            ->with('success', 'Contato enviado com sucesso!');
+    }
 
-public function updateApi(Request $request, string $id)
-{
-    $validarDados = $request->validate([
-        'nome'=>'min:3' ,
-        'email'=>'max:40',
-        'mensagem'=>'max:40'
-    ]);
 
-    $contato = Contato::findOrFail($id);
-    $contato ->update($validarDados);
+    public function updateApi(Request $request, string $id)
+    {
+        $validarDados = $request->validate([
+            'nome'     => ['sometimes','string','min:3','max:255'],
+            'email'    => ['sometimes','email','max:255'],
+            'mensagem' => ['sometimes','string','max:5000'],
+        ]);
 
-    return response()->json(
-        ['message' => 'Contato alterado com sucesso', 'contato' => $contato]
-    );
-}
+        $contato = Contato::findOrFail($id);
+        $contato->update($validarDados);
 
-public function destroyApi(string $id)
-{
-    Contato::where('id',$id)->delete();
+        return response()->json([
+            'message' => 'Contato alterado com sucesso',
+            'contato' => $contato,
+        ], 200);
+    }
 
-    return response()->json([
-        'message'=> 'Contato excluído',
-        'code'=>200
-    ]);
-}
 
-public function countContato(){
-    $contato = new Contato();
+    public function destroyApi(string $id)
+    {
+        $contato = Contato::findOrFail($id);
+        $contato->delete();
 
-    return response()->json([
-        'count'=> $contato->count(),
-        'code'=>200
-    ]);
-}
+        return response()->json([
+            'message' => 'Contato excluído',
+        ], 200);
+    }
 
+
+    public function countContato()
+    {
+        return response()->json([
+            'count' => Contato::count(),
+        ], 200);
+    }
 }
