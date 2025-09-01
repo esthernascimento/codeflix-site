@@ -1,54 +1,157 @@
-.dashboard-container {
-    width: 100%;
-    min-height: calc(100vh - 150px);
-    background-image: url('/img/telao.png');
+body {
+    background: #000;
+    background-image: url('../img/cinema-bg.png'); /* imagem de cadeiras */
     background-size: cover;
-    background-position: center bottom;
+    background-position: center;
+    font-family: "Oswald", sans-serif;
+}
+
+.dashboard {
     display: flex;
-    justify-content: center;
+    min-height: 100vh;
+}
+
+.sidebar {
+    /*background: #600d05;*/
+    width: 100px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    text-align: center;
-    color: #fff;
 }
 
-.dashboard-content {
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 50px 80px;
-    border-radius: 20px;
-    border: 1px solid #333;
-}
-
-.dashboard-content h1 {
-    font-size: 3.5rem;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
+.sidebar ul {
+    list-style: none;
+    padding: 0;
     margin: 0;
 }
 
-.dashboard-content p {
-    font-size: 1.2rem;
-    font-family: 'League Spartan', sans-serif;
-    margin-top: 10px;
-    color: #ccc;
+.sidebar ul li {
+    margin: 25px 0;
 }
 
-.logout-button {
-    margin-top: 40px;
-    padding: 12px 35px;
-    background-color: #e50914;
-    color: white;
+.sidebar ul li a, 
+.sidebar ul li button {
+    color: #fff;
+    font-size: 30px;
+    gap: 50px;
     border: none;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.1rem;
-    text-transform: uppercase;
+    background: transparent;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: 0.2s;
 }
 
-.logout-button:hover {
+.sidebar ul li a:hover, 
+.sidebar ul li button:hover {
+    color: #ff3333;
+    transform: scale(1.1);
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0px;
+}
+
+.cards {
+    display: flex;
+    gap: 40px;
+}
+
+.card {
+    background: #7c0f06;
+    padding: 25px 50px;
+    border-radius: 40px;
+    text-align: center;
+    color: white;
+    min-width: 200px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.6);
+    transition: transform 0.2s;
+}
+
+.card:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(229, 9, 20, 0.6);
+}
+
+.card i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.card p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.card h2 {
+    margin-top: 10px;
+    font-size: 2.5rem;
+}
+
+.box-table {
+    margin-top: 50px;
+    width: 80%;
+    max-width: 900px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.5);
+}
+
+
+.table-custom {
+    width: 100%;
+    border-collapse: collapse;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.table-custom thead {
+    background-color: #7c0f06;
+    color: #fff;
+    text-align: left;
+}
+
+.table-custom thead th {
+    padding: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.table-custom tbody tr {
+    background-color: rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    transition: background 0.3s;
+}
+
+.table-custom tbody tr:hover {
+    background-color: rgba(124, 15, 6, 0.8);
+}
+
+.table-custom td {
+    padding: 12px 14px;
+    vertical-align: middle;
+    font-weight: 500;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.actions i {
+    cursor: pointer;
+    font-size: 20px;
+    transition: 0.3s;
+    color: #fff;
+}
+
+.actions i:hover {
+    color: #ff3333;
 }
