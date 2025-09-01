@@ -48,7 +48,7 @@
     </main>
 
     <footer>
-        <p>Todos os direitos reservados &copy;</p>
+        <p>Codeflix todos os direitos reservados &copy;</p>
     </footer>
 </body>
 </html>

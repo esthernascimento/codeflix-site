@@ -189,5 +189,17 @@ main p{
     text-transform: uppercase;
 }
 
+footer {
+    background-color: #800000;
+    padding: 20px 0;
+    text-align: center;
+    align-items: center;
+}
+
+footer p {
+    color: #fff;
+    font-size: 14px;
+}
+
 
 

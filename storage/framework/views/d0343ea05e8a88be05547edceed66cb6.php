@@ -7,6 +7,8 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link rel="stylesheet" href="<?php echo e(asset('css/home.css')); ?>">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
 </head>
 <body>
       <header>
@@ -46,7 +48,7 @@
     </main>
 
     <footer>
-        <p>Todos os direitos reservados &copy;</p>
+        <p>Codeflix todos os direitos reservados &copy;</p>
     </footer>
 </body>
 </html>
