@@ -5,39 +5,40 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
 
 <div class="container">
-  <h1>FALE CONOSCO</h1>
+    <h1>FALE CONOSCO</h1>
     {{-- Sucesso --}}
-  @if(session('success'))
+    @if(session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
-  @endif
+    @endif
 
-  {{-- Erros de validação --}}
-  @if ($errors->any())
+    {{-- Erros de validação --}}
+    @if ($errors->any())
     <div class="alert alert-danger">
-      <ul style="margin:0; padding-left:18px">
-        @foreach ($errors->all() as $error)
-          <li>{{ $error }}</li>
-        @endforeach
-      </ul>
+        <ul style="margin:0; padding-left:18px">
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
     </div>
-  @endif
+    @endif
 
 
-  <form method="POST" action="{{ route('contatos.store') }}">
-    @csrf
+    <form method="POST" action="{{ route('contatos.store') }}" enctype="multipart/form-data">
+        @csrf
 
-    <label for="nome">Nome</label>
-    <input type="text" id="nome" name="nome" value="{{ old('nome') }}"
-      required />
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" value="{{ old('nome') }}" required />
 
-    <label for="email">E-mail</label>
-    <input type="email" id="email" name="email" value="{{ old('email') }}"
-      required />
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" value="{{ old('email') }}" required />
 
-    <label for="mensagem">Mensagem</label>
-    <textarea id="mensagem" name="mensagem" required>{{ old('mensagem') }}</textarea>
+        <label for="mensagem">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" required>{{ old('mensagem') }}</textarea>
 
-    <button type="submit" class="btn-enviar">ENVIAR</button>
-  </form>
+        <label for="caminho_foto">Foto</label>
+        <input type="file" id="caminho_foto" name="caminho_foto" accept="image/*" />
+
+        <button type="submit" class="btn-enviar">ENVIAR</button>
+    </form>
 </div>
 @endsection
