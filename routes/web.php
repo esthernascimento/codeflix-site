@@ -11,6 +11,7 @@ use App\Http\Controllers\ContatoController;
 Route::get('/', [FilmeController::class, 'index']);
 
 Route::get('/sobre', [MembroController::class, 'index'])->name('sobre');
+Route::resource('membros', MembroController::class)->except(['index', 'show']);
 
 Route::get('/contato', [ContatoController::class, 'index'])->name('contatos.index');
 
@@ -27,7 +28,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('dashboard', [ContatoController::class, 'listarContatos'])->name('listarContatos');
+    Route::get('dashboard', [ContatoController::class, 'listarContatos'])->name('dashboard');
 
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
