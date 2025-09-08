@@ -32,3 +32,5 @@ Route::put('/contato/{id}', 'App\Http\Controllers\ContatoController@updateApi');
 Route::delete('/contato/{id}', 'App\Http\Controllers\ContatoController@destroyApi');
 
 Route::get('/contato-qtd', 'App\Http\Controllers\ContatoController@countContato') ;
+
+Route::post('/contato', 'App\Http\Controllers\ContatoController@storeapi') ;
