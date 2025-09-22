@@ -1,13 +1,10 @@
-@extends('template')
+<?php $__env->startSection('sidebar'); ?>
+    <?php echo $__env->make('sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->stopSection(); ?>
 
-
-@section('sidebar')
-    @include('sidebar')
-@endsection
-
-@section('content')
-<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
-<link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
+<?php $__env->startSection('content'); ?>
+<link rel="stylesheet" href="<?php echo e(asset('css/dashboard.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('css/sidebar.css')); ?>">
 
 <div class="cards">
     <div class="card">
@@ -29,9 +26,9 @@
     </div>
 </div>
 
-@if(session('success'))
-    <div class="alert-success">{{ session('success') }}</div>
-@endif
+<?php if(session('success')): ?>
+    <div class="alert-success"><?php echo e(session('success')); ?></div>
+<?php endif; ?>
 
 <div class="box-table">
             <table class="table-custom">
@@ -44,12 +41,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @isset($contatos)
-                        @forelse($contatos as $item)
+                    <?php if(isset($contatos)): ?>
+                        <?php $__empty_1 = true; $__currentLoopData = $contatos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                             <tr>
-                                <td>{{ $item->nome }}</td>
-                                <td>{{ $item->email }}</td>
-                                <td>{{ $item->mensagem }}</td>
+                                <td><?php echo e($item->nome); ?></td>
+                                <td><?php echo e($item->email); ?></td>
+                                <td><?php echo e($item->mensagem); ?></td>
                                 <td class="actions">
                                     
                                     <a href="#" title="Editar"><i class="bi bi-pencil"></i></a>
@@ -57,27 +54,30 @@
                                     <a href="#" title="Excluir"><i class="bi bi-trash"></i></a>
                                 </td>
                             </tr>
-                        @empty
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                             <tr>
                                 <td colspan="4" style="text-align:center;">Nenhum contato encontrado.</td>
                             </tr>
-                        @endforelse
-                    @else
+                        <?php endif; ?>
+                    <?php else: ?>
                         <tr>
                             <td colspan="4" style="text-align:center;">Lista de contatos não carregada.</td>
                         </tr>
-                    @endisset
+                    <?php endif; ?>
                 </tbody>
             </table>
 
-            @isset($contatos)
-                @if(method_exists($contatos, 'links'))
+            <?php if(isset($contatos)): ?>
+                <?php if(method_exists($contatos, 'links')): ?>
                     <div class="pagination">
-                        {{ $contatos->links() }}
+                        <?php echo e($contatos->links()); ?>
+
                     </div>
-                @endif
-            @endisset
+                <?php endif; ?>
+            <?php endif; ?>
         </div>
     </main>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Users/mac/Desktop/ETEC/codeflix-site/resources/views/auth/dashboard.blade.php ENDPATH**/ ?>

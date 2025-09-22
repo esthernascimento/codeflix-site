@@ -10,7 +10,7 @@ class ContatoController extends Controller
 
     public function index()
     {
-        // mais recentes primeiro + paginação
+        // mais recentes primeiro + paginacao
         $contatos = Contato::latest()->paginate(10);
         return view('contato', compact('contatos'));
     }
@@ -49,10 +49,16 @@ class ContatoController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'nome'     => ['required','string','max:255'],
-            'email'    => ['required','email','max:255'],
-            'mensagem' => ['required','string','max:5000'],
+            'nome'          => ['required','string','max:255'],
+            'email'         => ['required','email','max:255'],
+            'mensagem'      => ['required','string','max:5000'],
+            'caminho_foto'  => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ]);
+        $path = '';
+        if ($request->File('caminho_foto')) {
+            $path = $request->file('caminho_foto')->store('images', 'public');
+        }
+        $data['caminho_foto'] = $path;
 
         Contato::create($data);
 

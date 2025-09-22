@@ -13,6 +13,7 @@ class Contato extends Model
         protected $fillable = [
         'nome',
         'email',
-        'mensagem'        
+        'mensagem',
+        'caminho_foto'     
     ];
 }

@@ -11,6 +11,10 @@
                 <h1 class="auth-title">Faça Login</h1>
             </div>
 
+            @if(session('success'))
+                <p style="color: #28a745; text-align: center; margin-bottom: 20px; font-weight: bold;">{{ session('success') }}</p>
+            @endif
+
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
