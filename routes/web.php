@@ -6,6 +6,7 @@ use App\Http\Controllers\FilmeController;
 use App\Http\Controllers\MembroController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContatoController;
+use App\Http\Controllers\DashboardController;
 
 
 Route::get('/', [FilmeController::class, 'index']);
@@ -27,8 +28,9 @@ Route::middleware('guest')->group(function () {
 
 
 Route::middleware('auth')->group(function () {
+    Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])
+        ->name('dashboard');
 
-    Route::get('dashboard', [ContatoController::class, 'listarContatos'])->name('dashboard');
-
-    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('logout', [\App\Http\Controllers\AuthController::class, 'logout'])
+        ->name('logout');
 });
