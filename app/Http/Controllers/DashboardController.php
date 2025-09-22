@@ -11,28 +11,50 @@ class DashboardController extends Controller
 {
     public function index()
     {
-    
+
         $contatos = Contato::latest()->paginate(10);
 
-        $totalComedia   = Filme::where('genero', 'Comédia')->count();
-        $totalAcao      = Filme::where('genero', 'Ação')->count();
-        $totalDrama     = Filme::where('genero', 'Drama')->count();
-        $totalAnimacao  = Filme::where('genero', 'Animação')->count();
+        $totalComedia = Filme::where('genero', 'Comédia')->count();
+        $totalAcao = Filme::where('genero', 'Ação')->count();
+        $totalDrama = Filme::where('genero', 'Drama')->count();
+        $totalAnimacao = Filme::where('genero', 'Animação')->count();
 
-        $filmesComedia  = Filme::where('genero', 'Comédia')->orderBy('titulo')->get();
-        $filmesAcao     = Filme::where('genero', 'Ação')->orderBy('titulo')->get();
-        $filmesDrama    = Filme::where('genero', 'Drama')->orderBy('titulo')->get();
+        $filmesComedia = Filme::where('genero', 'Comédia')->orderBy('titulo')->get();
+        $filmesAcao = Filme::where('genero', 'Ação')->orderBy('titulo')->get();
+        $filmesDrama = Filme::where('genero', 'Drama')->orderBy('titulo')->get();
         $filmesAnimacao = Filme::where('genero', 'Animação')->orderBy('titulo')->get();
 
-        $filmesCount   = Filme::count();
-        $adminsCount   = User::where('is_admin', '1')->count();   
+        $filmesCount = Filme::count();
+        $adminsCount = User::where('is_admin', '1')->count();
+        $membrosCount = Membro::count();
+
+        $totalL = Filme::where('classificacao', 'L')->count();
+        $total10 = Filme::where('classificacao', '10')->count();
+        $total12 = Filme::where('classificacao', '12')->count();
+        $total16 = Filme::where('classificacao', '16')->count();
+
+
+        $filmesCount = Filme::count();
+        $adminsCount = User::where('is_admin', '1')->count();
         $membrosCount = Membro::count();
 
         return view('auth.dashboard', compact(
             'contatos',
-            'totalComedia','totalAcao','totalDrama','totalAnimacao',
-            'filmesComedia','filmesAcao','filmesDrama','filmesAnimacao',
-            'filmesCount','adminsCount','membrosCount'
+            'totalComedia',
+            'totalAcao',
+            'totalDrama',
+            'totalAnimacao',
+            'filmesComedia',
+            'filmesAcao',
+            'filmesDrama',
+            'filmesAnimacao',
+            'totalL',
+            'total10',
+            'total12',
+            'total16', 
+            'filmesCount',
+            'adminsCount',
+            'membrosCount'
         ));
     }
 }

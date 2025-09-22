@@ -12,7 +12,7 @@
 <body>
 
     <header>
-        
+    
         <div class="interface">
             <div class="logo">
                 <a href="<?php echo e(url('/')); ?>">
@@ -49,8 +49,6 @@
     </header>
 
     <div class="main-container">
-        
-        
         
         <?php echo $__env->yieldContent('sidebar'); ?>
 
