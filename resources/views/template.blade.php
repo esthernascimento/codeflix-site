@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeFlix</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/layout.css') }}"> {{-- Essencial para o layout --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 <body>
 
     <header>
+    
         <div class="interface">
             <div class="logo">
                 <a href="{{ url('/') }}">
@@ -21,7 +23,6 @@
                 <ul>
                     <li><a href="{{ url('/') }}">HOME</a></li>
                     <li><a href="#">EM CARTAZ</a></li>
-                    {{-- Lógica do link de Contato --}}
                     <li>
                         @if(auth()->check() && auth()->user()->is_admin)
                             <a href="{{ route('dashboard') }}">CONTATO</a>
@@ -47,9 +48,15 @@
         </div>
     </header>
 
-    <main>
-        @yield('content')
-    </main>
+    <div class="main-container">
+        
+        @yield('sidebar')
+
+        <main class="content-wrapper">
+            @yield('content')
+        </main>
+
+    </div>
 
     <footer>
         <p>Codeflix todos os direitos reservados &copy;</p>

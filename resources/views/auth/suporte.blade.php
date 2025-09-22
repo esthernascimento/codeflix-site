@@ -20,7 +20,6 @@
         </ul>
     </aside>
 
-    <!-- Conteúdo principal -->
     <main class="content">
         <div class="cards">
             <div class="card">
