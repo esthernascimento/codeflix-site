@@ -9,6 +9,10 @@
                 <h1 class="auth-title">Faça Login</h1>
             </div>
 
+            <?php if(session('success')): ?>
+                <p style="color: #28a745; text-align: center; margin-bottom: 20px; font-weight: bold;"><?php echo e(session('success')); ?></p>
+            <?php endif; ?>
+
             <form method="POST" action="<?php echo e(route('login')); ?>">
                 <?php echo csrf_field(); ?>
 
