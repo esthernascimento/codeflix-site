@@ -1,36 +1,34 @@
-@extends('template')
+<?php $__env->startSection('sidebar'); ?>
+    <?php echo $__env->make('sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->stopSection(); ?>
 
-@section('sidebar')
-    @include('sidebar')
-@endsection
-
-@section('content')
-<link rel="stylesheet" href="{{ asset('css/layout.css') }}">
-<link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
-<link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
+<?php $__env->startSection('content'); ?>
+<link rel="stylesheet" href="<?php echo e(asset('css/layout.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('css/dashboard.css')); ?>">
+<link rel="stylesheet" href="<?php echo e(asset('css/sidebar.css')); ?>">
 
 <main class="dashboard-content">
     <div class="top-cards">
         <div class="card">
             <i class="bi bi-person-fill"></i>
             <p>Adm cadastrados</p>
-            <h2>{{ $adminsCount ?? 4 }}</h2>
+            <h2><?php echo e($adminsCount ?? 4); ?></h2>
         </div>
         <div class="card">
             <i class="bi bi-film"></i>
             <p>Filmes em Cartaz</p>
-            <h2>{{ $filmesCount ?? 10 }}</h2>
+            <h2><?php echo e($filmesCount ?? 10); ?></h2>
         </div>
         <div class="card">
             <i class="bi bi-people"></i>
             <p>Membros Cadastrados</p>
-            <h2>{{ $membrosCount ?? 101 }}</h2>
+            <h2><?php echo e($membrosCount ?? 101); ?></h2>
         </div>
     </div>
 
-    @if(session('success'))
-        <div class="alert-success">{{ session('success') }}</div>
-    @endif
+    <?php if(session('success')): ?>
+        <div class="alert-success"><?php echo e(session('success')); ?></div>
+    <?php endif; ?>
 
     <div class="charts-row">
         <div class="chart-box">
@@ -53,31 +51,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @isset($contatos)
-                        @forelse($contatos as $item)
+                    <?php if(isset($contatos)): ?>
+                        <?php $__empty_1 = true; $__currentLoopData = $contatos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                             <tr>
-                                <td>{{ $item->nome }}</td>
-                                <td>{{ $item->email }}</td>
-                                <td>{{ $item->mensagem }}</td>
+                                <td><?php echo e($item->nome); ?></td>
+                                <td><?php echo e($item->email); ?></td>
+                                <td><?php echo e($item->mensagem); ?></td>
                                 <td class="actions">
                                     <a href="#"><i class="bi bi-pencil"></i></a>
                                     <a href="#"><i class="bi bi-slash-circle"></i></a>
                                     <a href="#"><i class="bi bi-trash"></i></a>
                                 </td>
                             </tr>
-                        @empty
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                             <tr><td colspan="4" style="text-align:center;">Nenhum contato encontrado.</td></tr>
-                        @endforelse
-                    @else
+                        <?php endif; ?>
+                    <?php else: ?>
                         <tr><td colspan="4" style="text-align:center;">Lista de contatos não carregada.</td></tr>
-                    @endisset
+                    <?php endif; ?>
                 </tbody>
             </table>
-            @isset($contatos)
-                @if(method_exists($contatos, 'links'))
-                    <div class="pagination">{{ $contatos->links() }}</div>
-                @endif
-            @endisset
+            <?php if(isset($contatos)): ?>
+                <?php if(method_exists($contatos, 'links')): ?>
+                    <div class="pagination"><?php echo e($contatos->links()); ?></div>
+                <?php endif; ?>
+            <?php endif; ?>
         </div>
 
         <div class="box-table">
@@ -89,10 +87,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td>Comédia</td><td>{{ $totalComedia ?? 0 }}</td></tr>
-                    <tr><td>Ação</td><td>{{ $totalAcao ?? 0 }}</td></tr>
-                    <tr><td>Drama</td><td>{{ $totalDrama ?? 0 }}</td></tr>
-                    <tr><td>Animação</td><td>{{ $totalAnimacao ?? 0 }}</td></tr>
+                    <tr><td>Comédia</td><td><?php echo e($totalComedia ?? 0); ?></td></tr>
+                    <tr><td>Ação</td><td><?php echo e($totalAcao ?? 0); ?></td></tr>
+                    <tr><td>Drama</td><td><?php echo e($totalDrama ?? 0); ?></td></tr>
+                    <tr><td>Animação</td><td><?php echo e($totalAnimacao ?? 0); ?></td></tr>
                 </tbody>
             </table>
         </div>
@@ -102,10 +100,11 @@
 <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 <script>
     var filmesGenero = {
-        'Comédia': {{ $totalComedia ?? 0 }},
-        'Ação': {{ $totalAcao ?? 0 }},
-        'Drama': {{ $totalDrama ?? 0 }},
-        'Animação': {{ $totalAnimacao ?? 0 }}
+        'Comédia': <?php echo e($totalComedia ?? 0); ?>,
+        'Ação': <?php echo e($totalAcao ?? 0); ?>,
+        'Drama': <?php echo e($totalDrama ?? 0); ?>,
+        'Animação': <?php echo e($totalAnimacao ?? 0); ?>
+
     };
 
     var filmesChart = echarts.init(document.getElementById('filmesChart'));
@@ -122,10 +121,11 @@
     });
 
     var filmesClassificacao = {
-        'Livre': {{ $totalL ?? 0 }},
-        '10 anos': {{ $total10 ?? 0 }},
-        '12 anos': {{ $total12 ?? 0 }},
-        '16 anos': {{ $total16 ?? 0 }}
+        'Livre': <?php echo e($totalL ?? 0); ?>,
+        '10 anos': <?php echo e($total10 ?? 0); ?>,
+        '12 anos': <?php echo e($total12 ?? 0); ?>,
+        '16 anos': <?php echo e($total16 ?? 0); ?>
+
     };
 
     var classificacaoChart = echarts.init(document.getElementById('classificacaoChart'));
@@ -141,4 +141,6 @@
         }]
     });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Aluno\Downloads\codeflix-site\resources\views/auth/dashboard.blade.php ENDPATH**/ ?>
