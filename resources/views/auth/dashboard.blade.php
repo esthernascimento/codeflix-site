@@ -49,7 +49,8 @@
                         <th>Nome Contato</th>
                         <th>E-mail</th>
                         <th>Mensagem</th>
-                        <th>Ações</th>
+                        <th>Foto</th>
+             
                     </tr>
                 </thead>
                 <tbody>
@@ -59,11 +60,13 @@
                                 <td>{{ $item->nome }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td>{{ $item->mensagem }}</td>
-                                <td class="actions">
-                                    <a href="#"><i class="bi bi-pencil"></i></a>
-                                    <a href="#"><i class="bi bi-slash-circle"></i></a>
-                                    <a href="#"><i class="bi bi-trash"></i></a>
-                                </td>
+                                <td>
+                                    @if($item->caminho_foto)
+                                    <img src="{{ asset('storage/' . $item->caminho_foto) }}" alt="Foto de {{ $item->nome }}" class="contact-photo">
+                                    @else
+                                        <span>Não encaminhou foto</span>
+                                    @endif
+                           
                             </tr>
                         @empty
                             <tr><td colspan="4" style="text-align:center;">Nenhum contato encontrado.</td></tr>
@@ -127,18 +130,35 @@
         '12 anos': {{ $total12 ?? 0 }},
         '16 anos': {{ $total16 ?? 0 }}
     };
-
+    
     var classificacaoChart = echarts.init(document.getElementById('classificacaoChart'));
-    classificacaoChart.setOption({
-        title: { text: 'Filmes por Classificação Etária', left: 'center', textStyle: { color: '#fff' } },
-        tooltip: { trigger: 'axis' },
-        xAxis: { type: 'category', data: Object.keys(filmesClassificacao), axisLabel: { color: '#fff' } },
-        yAxis: { type: 'value', axisLabel: { color: '#fff' } },
-        series: [{
-            type: 'bar',
-            data: Object.values(filmesClassificacao),
-            itemStyle: { color: '#a83232', borderRadius: [6, 6, 0, 0] }
-        }]
-    });
+classificacaoChart.setOption({
+    title: {
+        text: 'Filmes por Classificação Etária',
+        left: 'center',
+        textStyle: { color: '#fff' }
+    },
+    tooltip: { trigger: 'axis' },
+    xAxis: {
+        type: 'category',
+        data: Object.keys(filmesClassificacao),
+        axisLabel: { color: '#fff' }
+    },
+    yAxis: {
+        type: 'value',
+        axisLabel: { color: '#fff' }
+    },
+    series: [{
+        type: 'bar',
+        data: Object.entries(filmesClassificacao).map(([key, value], index) => ({
+            value: value,
+            itemStyle: {
+                color: ['#00a86b', '#69fcfcff', '#ffd700', '#ff0000'][index],
+                borderRadius: [6, 6, 0, 0]
+            }
+        }))
+    }]
+});
+
 </script>
 @endsection

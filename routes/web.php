@@ -9,7 +9,9 @@ use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\DashboardController;
 
 
-Route::get('/', [FilmeController::class, 'index']);
+Route::get('/', [FilmeController::class, 'index'])->name('filmes.index');
+
+Route::resource('filmes', FilmeController::class)->except(['show']);
 
 Route::get('/sobre', [MembroController::class, 'index'])->name('sobre');
 Route::resource('membros', MembroController::class)->except(['index', 'show']);
@@ -30,6 +32,8 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])
         ->name('dashboard');
+
+    Route::get('/sobre', [MembroController::class, 'index'])->name('sobre');
 
     Route::post('logout', [\App\Http\Controllers\AuthController::class, 'logout'])
         ->name('logout');

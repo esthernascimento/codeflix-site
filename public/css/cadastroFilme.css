@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&display=swap');
+
+/* Reset e Fundo */
+body {
+    margin: 0;
+    color: #fff;
+    /* Usa a fonte Oswald para um visual cinematográfico */
+    font-family: 'Oswald', sans-serif; 
+    /* Imagem de fundo e garantindo que o formulário fique centralizado */
+    background-image: url(../img/telao.png);
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh; 
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    padding: 20px 0; /* Espaçamento vertical para telas pequenas */
+}
+
+/* Container do Formulário: Efeito Blur e Visual Escuro */
+.form-container {
+    max-width: 600px;
+    padding: 45px;
+    background: rgba(17, 17, 17, 0.45);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.75);
+    animation: fadeIn 0.5s ease-in-out;
+    width: 90%; 
+    margin: auto; /* Centraliza e permite o ajuste pelo flex do body */
+}
+
+
+h1 {
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 35px;
+    color: #ffffffa2 !important; 
+    letter-spacing: 2px;
+    border-bottom: 2px solid #a83232; /* Linha de destaque vermelha */
+    padding-bottom: 12px;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* Rótulos */
+label {
+    font-size: 15px;
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+    display: block; 
+}
+
+/* Estilo para todos os campos de texto, URL e número */
+input[type="text"],
+input[type="url"], 
+input[type="number"], 
+input[type="file"] {
+    background: rgba(26, 26, 26, 0.6);
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    padding: 13px;
+    font-size: 16px;
+    color: #fff;
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="url"]:focus,
+input[type="number"]:focus,
+input[type="file"]:focus {
+    background-color: rgba(34, 34, 34, 0.8);
+    border: 1px solid #a83232; /* Borda vermelha ao focar */
+    box-shadow: 0 0 14px rgba(168, 50, 50, 0.5);
+    outline: none;
+}
+
+/* Botão de envio (Submit) */
+button[type="submit"] {
+    margin-top: 28px;
+    background: linear-gradient(135deg, #a83232, #7c0f06); /* Gradiente vermelho */
+    color: #fff;
+    border: none;
+    padding: 15px 0;
+    font-size: 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0px 6px 22px rgba(168, 50, 50, 0.55);
+}
+
+button[type="submit"]:hover {
+    background: linear-gradient(135deg, #7c0f06, #a83232);
+    transform: translateY(-3px);
+    box-shadow: 0px 9px 28px rgba(124, 15, 6, 0.65);
+}
+
+/* Estilos para Mensagens (Alertas de Sucesso e Erro) */
+.alert {
+    padding: 14px 16px;
+    border-radius: 10px;
+    margin: 18px 0;
+    font-size: 15px;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.alert-success {
+    background: #0f3d2e;
+    border: 1px solid #34d399;
+    color: #a7f3d0;
+}
+
+.alert-danger {
+    background: #3d0f0f;
+    border: 1px solid #f87171;
+    color: #fecaca;
+}
+
+.alert ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+/* Animação */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mídia Query para melhor visualização em telas menores */
+@media (max-width: 650px) {
+    .form-container {
+        padding: 30px 20px;
+        margin: 10px;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 25px;
+    }
+}

@@ -16,3 +16,4 @@ class Filme extends Model
         'classificacao'
     ];
 }
+

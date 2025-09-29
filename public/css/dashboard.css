@@ -108,19 +108,12 @@ body, html {
     background: rgba(124,15,6,0.3);
 }
 
-.actions {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
+.contact-photo {
+    max-width: 80px;  
+    max-height: 80px;
+    border-radius: 50px; 
+    object-fit: cover; 
+    display: block; 
 }
 
-.actions i {
-    font-size: 20px;
-    cursor: pointer;
-    transition: 0.2s;
-    color: #fff !important;
-}
 
-.actions i:hover {
-    color: #ff6b6b !important;
-}

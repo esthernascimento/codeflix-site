@@ -12,7 +12,7 @@ html {
 .titulo {
     margin: 0;
     padding: 10px;
-    font-size: 90px;
+    font-size: 50px;
     font-family: 'League Spartan', sans-serif;
     font-weight: 660;
     background-color: #000;
@@ -205,7 +205,7 @@ header nav li {
 }
 
 .btn-edit {
-    background-color: #007bff; 
+    background-color: #68342e; 
 }
 
 .btn-delete {

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 class FilmeController extends Controller
 {
+    // ... (Seus métodos existentes, como index() e os de API) ...
+
     public function index()
     {
         $filmes = \App\Models\Filme::all();
@@ -20,17 +22,36 @@ class FilmeController extends Controller
         return $filmes;
     }
 
+    public function create()
+    {
+        return view('cadastroFilme'); 
+    }
+
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'titulo' => 'required|string|max:255',
+            'genero' => 'required|string|max:100',
+            'imagem' => 'nullable|url|max:255',
+            'classificacao' => 'required|integer|min:0|max:18',
+        ]);
+
+        Filme::create($request->all());
+     
+        return redirect()->route('filmes.index')->with('success', 'Filme cadastrado com sucesso!');
+    }
+
     public function storeApi(Request $request){
 
-    $filme = new Filme();
-    
-    $filme -> titulo =  $request->titulo;
-    $filme -> genero = $request->genero;
-    $filme -> imagem = $request->imagem;
-    $filme -> classificacao = $request->classificacao;
-    $filme -> created_at =date('Y-m-d H:i:s');
-    $filme -> update_at =date('Y-m-d H:i:s');
-
-    $filme -> save();
+        $filme = Filme::create([
+            'titulo' => $request->titulo,
+            'genero' => $request->genero,
+            'imagem' => $request->imagem,
+            'classificacao' => $request->classificacao,
+        ]);
+        
+        // Retorna o filme recém-criado para a API
+        return response()->json($filme, 201);
     }
 }
