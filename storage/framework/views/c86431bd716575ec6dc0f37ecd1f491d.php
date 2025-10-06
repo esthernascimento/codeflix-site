@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeFlix</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link rel="stylesheet" href="<?php echo e(asset('css/home.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('css/layout.css')); ?>"> 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 <body>
 
     <header>
+    
         <div class="interface">
             <div class="logo">
                 <a href="<?php echo e(url('/')); ?>">
@@ -21,7 +23,6 @@
                 <ul>
                     <li><a href="<?php echo e(url('/')); ?>">HOME</a></li>
                     <li><a href="#">EM CARTAZ</a></li>
-                    
                     <li>
                         <?php if(auth()->check() && auth()->user()->is_admin): ?>
                             <a href="<?php echo e(route('dashboard')); ?>">CONTATO</a>
@@ -47,13 +48,18 @@
         </div>
     </header>
 
-    <main>
-        <?php echo $__env->yieldContent('content'); ?>
-    </main>
+    <div class="main-container">
+        
+        <?php echo $__env->yieldContent('sidebar'); ?>
+
+        <main class="content-wrapper">
+            <?php echo $__env->yieldContent('content'); ?>
+        </main>
+
+    </div>
 
     <footer>
         <p>Codeflix todos os direitos reservados &copy;</p>
     </footer>
 </body>
-</html>
-<?php /**PATH C:\Users\userlocal\Downloads\codeflix-site\resources\views/template.blade.php ENDPATH**/ ?>
+</html><?php /**PATH C:\Users\userlocal\Downloads\codeflix-site\resources\views/template.blade.php ENDPATH**/ ?>

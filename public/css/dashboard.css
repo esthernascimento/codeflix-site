@@ -112,8 +112,91 @@ body, html {
     max-width: 80px;  
     max-height: 80px;
     border-radius: 50px; 
-    object-fit: cover; 
+    object-fit: cover;  
     display: block; 
 }
 
+.table-custom th.sortable {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
 
+.table-custom th.sortable:hover {
+    background-color: #7c0f06;
+}
+
+.table-custom th a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.table-custom th a i {
+    margin-left: 8px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center; 
+    margin-top: 20px;
+}
+
+.pagination nav {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination .pagination { 
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 8px;
+    overflow: hidden; 
+}
+
+.pagination .page-item {
+    margin: 0 2px;
+}
+
+.pagination .page-link {
+    color: #fff;
+    background-color: #333;
+    border: 1px solid #555;
+    padding: 8px 15px;
+    display: block;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.pagination .page-item:not(.active) .page-link:hover {
+    background-color: #a83232; 
+    border-color: #7c0f06;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #7c0f06; 
+    border-color: #a83232;
+    color: #fff;
+    cursor: default;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #666;
+    background-color: #222;
+    border-color: #444;
+    pointer-events: none; 
+}
+
+.pagination .page-item:first-child .page-link {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.pagination .page-item:last-child .page-link {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
