@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="{{ asset('css/layout.css') }}">
 <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
 <main class="dashboard-content">
     <div class="top-cards">
@@ -46,39 +47,42 @@
             <table class="table-custom">
                 <thead>
                     <tr>
-                        <th>Nome Contato</th>
+                        <th class="sortable">
+                            @php $nextDirection = ($sort == 'nome' && $direction == 'asc') ? 'desc' : 'asc'; @endphp
+                            <a href="{{ url()->current() }}?sort=nome&direction={{ $nextDirection }}">
+                                Nome Contato
+                                @if($sort == 'nome')
+                                    <i class="bi {{ $direction == 'asc' ? 'bi-sort-alpha-down' : 'bi-sort-alpha-up' }}"></i>
+                                @endif
+                            </a>
+                        </th>
                         <th>E-mail</th>
                         <th>Mensagem</th>
                         <th>Foto</th>
-             
                     </tr>
                 </thead>
                 <tbody>
-                    @isset($contatos)
-                        @forelse($contatos as $item)
-                            <tr>
-                                <td>{{ $item->nome }}</td>
-                                <td>{{ $item->email }}</td>
-                                <td>{{ $item->mensagem }}</td>
-                                <td>
-                                    @if($item->caminho_foto)
-                                    <img src="{{ asset('storage/' . $item->caminho_foto) }}" alt="Foto de {{ $item->nome }}" class="contact-photo">
-                                    @else
-                                        <span>Não encaminhou foto</span>
-                                    @endif
-                           
-                            </tr>
-                        @empty
-                            <tr><td colspan="4" style="text-align:center;">Nenhum contato encontrado.</td></tr>
-                        @endforelse
-                    @else
-                        <tr><td colspan="4" style="text-align:center;">Lista de contatos não carregada.</td></tr>
-                    @endisset
+                    @forelse($contatos as $item)
+                        <tr>
+                            <td>{{ $item->nome }}</td>
+                            <td>{{ $item->email }}</td>
+                            <td>{{ $item->mensagem }}</td>
+                            <td>
+                                @if($item->caminho_foto)
+                                <img src="{{ asset('storage/' . $item->caminho_foto) }}" alt="Foto de {{ $item->nome }}" class="contact-photo">
+                                @else
+                                    <span>Não encaminhou foto</span>
+                                @endif
+                            </td>
+                        </tr>
+                    @empty
+                        <tr><td colspan="4" style="text-align:center;">Nenhum contato encontrado.</td></tr>
+                    @endforelse
                 </tbody>
             </table>
             @isset($contatos)
                 @if(method_exists($contatos, 'links'))
-                    <div class="pagination">{{ $contatos->links() }}</div>
+                    <div class="pagination">{{ $contatos->appends(request()->query())->links() }}</div>
                 @endif
             @endisset
         </div>
@@ -88,14 +92,24 @@
                 <thead>
                     <tr>
                         <th>Gênero</th>
-                        <th>Total de filmes</th>
+                        <th class="sortable">
+                            @php $nextDirection = ($sort == 'total' && $direction == 'desc') ? 'asc' : 'desc'; @endphp
+                            <a href="{{ url()->current() }}?sort=total&direction={{ $nextDirection }}">
+                                Total de filmes
+                                @if($sort == 'total')
+                                    <i class="bi {{ $direction == 'asc' ? 'bi-sort-numeric-down' : 'bi-sort-numeric-up-alt' }}"></i>
+                                @endif
+                            </a>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td>Comédia</td><td>{{ $totalComedia ?? 0 }}</td></tr>
-                    <tr><td>Ação</td><td>{{ $totalAcao ?? 0 }}</td></tr>
-                    <tr><td>Drama</td><td>{{ $totalDrama ?? 0 }}</td></tr>
-                    <tr><td>Animação</td><td>{{ $totalAnimacao ?? 0 }}</td></tr>
+                    @foreach($generos as $genero)
+                        <tr>
+                            <td>{{ $genero['nome'] }}</td>
+                            <td>{{ $genero['total'] }}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -132,33 +146,32 @@
     };
     
     var classificacaoChart = echarts.init(document.getElementById('classificacaoChart'));
-classificacaoChart.setOption({
-    title: {
-        text: 'Filmes por Classificação Etária',
-        left: 'center',
-        textStyle: { color: '#fff' }
-    },
-    tooltip: { trigger: 'axis' },
-    xAxis: {
-        type: 'category',
-        data: Object.keys(filmesClassificacao),
-        axisLabel: { color: '#fff' }
-    },
-    yAxis: {
-        type: 'value',
-        axisLabel: { color: '#fff' }
-    },
-    series: [{
-        type: 'bar',
-        data: Object.entries(filmesClassificacao).map(([key, value], index) => ({
-            value: value,
-            itemStyle: {
-                color: ['#00a86b', '#69fcfcff', '#ffd700', '#ff0000'][index],
-                borderRadius: [6, 6, 0, 0]
-            }
-        }))
-    }]
-});
-
+    classificacaoChart.setOption({
+        title: {
+            text: 'Filmes por Classificação Etária',
+            left: 'center',
+            textStyle: { color: '#fff' }
+        },
+        tooltip: { trigger: 'axis' },
+        xAxis: {
+            type: 'category',
+            data: Object.keys(filmesClassificacao),
+            axisLabel: { color: '#fff' }
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: { color: '#fff' }
+        },
+        series: [{
+            type: 'bar',
+            data: Object.entries(filmesClassificacao).map(([key, value], index) => ({
+                value: value,
+                itemStyle: {
+                    color: ['#00a86b', '#69fcfcff', '#ffd700', '#ff0000'][index],
+                    borderRadius: [6, 6, 0, 0]
+                }
+            }))
+        }]
+    });
 </script>
 @endsection
