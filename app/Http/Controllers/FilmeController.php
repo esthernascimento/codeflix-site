@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Filme;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 
 class FilmeController extends Controller
 {
@@ -51,7 +53,63 @@ class FilmeController extends Controller
             'classificacao' => $request->classificacao,
         ]);
         
-        // Retorna o filme recém-criado para a API
+       
         return response()->json($filme, 201);
     }
+
+       public function download()
+    {               
+        $sql = 'select * from filmes';
+
+        $queryJson = DB::select($sql);
+
+        // Nome do arquivo CSV
+        $filename = 'filmes.csv';
+
+        // Cabeçalho do arquivo
+        
+        $headers = [
+            'Content-Type' => 'text/csv;charset=utf-8',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+        ];        
+
+        //Cabeçalho        
+        
+        $file = fopen('php://output', 'w');
+
+        fclose($file);
+
+        // Gera o arquivo CSV
+        $callback = function () use ($queryJson) {
+            
+        $file = fopen('php://output', 'w');
+
+        //Cabeçalho
+        $colId = "ID";
+        $colTitulo = mb_convert_encoding("Titulo","ISO-8859-1");
+        $colGenero = mb_convert_encoding("Genero","ISO-8859-1");
+        $colImagem = "Imagem";
+        $colClassificacao = "Classificacao";
+
+        $escreve = fwrite($file, "$colId;$colTitulo;$colGenero;$colImagem;$colClassificacao;");
+        
+            foreach($queryJson as $d) {
+                $data1 = $d->id;
+                $data2 = mb_convert_encoding($d->titulo,"ISO-8859-1");
+                $data3 = mb_convert_encoding($d->genero,"ISO-8859-1");
+                $data4 = $d->imagem;
+                $data5 = $d->classificacao;
+                $escreve = fwrite($file, "\n$data1;$data2;$data3;$data4;$data5;");
+            }
+            fclose($file);
+        };
+
+        // Retorna o arquivo CSV para download
+        return Response::stream($callback, 200, $headers);
+
+    }//fim da função download
+
+
+
+
 }

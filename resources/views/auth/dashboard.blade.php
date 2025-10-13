@@ -42,6 +42,15 @@
         </div>
     </div>
 
+    <div class="downloads">
+        <a href="/download-contatos-csv" class="btn-download">
+            <i class="bi bi-download"></i> Baixar Contatos CSV
+        </a>
+        <a href="/download-filmes-csv" class="btn-download">
+            <i class="bi bi-download"></i> Baixar Filmes CSV
+        </a>
+    </div>
+
     <div class="tables-row">
         <div class="box-table">
             <table class="table-custom">
