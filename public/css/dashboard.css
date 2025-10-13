@@ -200,3 +200,9 @@ body, html {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
 }
+
+.downloads {
+    display: flex;
+    flex-direction: row;
+    gap: 900px
+}

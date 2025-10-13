@@ -9,6 +9,9 @@ use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\DashboardController;
 
 
+Route::get('/download-filmes-csv', 'App\Http\Controllers\FilmeController@download')->name('filmes.csv');
+Route::get('/download-contatos-csv', 'App\Http\Controllers\ContatoController@download')->name('contatos.csv');
+
 Route::get('/', [FilmeController::class, 'index'])->name('filmes.index');
 
 Route::resource('filmes', FilmeController::class)->except(['show']);
