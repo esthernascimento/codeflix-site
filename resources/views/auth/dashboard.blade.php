@@ -50,7 +50,7 @@
             <i class="bi bi-download"></i> Baixar Filmes CSV
         </a>
     </div>
-     <a href="/download-pdf">Gerar PDF</a>
+     
 
     <div class="tables-row">
         <div class="box-table">
@@ -122,7 +122,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <a href="/download-pdf" class="btn-pdf">Gerar PDF</a>
         </div>
+        
     </div>
 </main>
 
