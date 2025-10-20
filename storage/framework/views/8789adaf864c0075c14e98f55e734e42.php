@@ -48,7 +48,7 @@
             <i class="bi bi-download"></i> Baixar Filmes CSV
         </a>
     </div>
-     <a href="/download-pdf">Gerar PDF</a>
+     
 
     <div class="tables-row">
         <div class="box-table">
@@ -120,7 +120,9 @@
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
             </table>
+            <a href="/download-pdf" class="btn-pdf">Gerar PDF</a>
         </div>
+        
     </div>
 </main>
 
